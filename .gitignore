@@ -1,0 +1,8 @@
+.vscode
+__pycache__
+ix-dev/**/rendered
+.DS_Store
+
+ix-dev/test/test-lib/migrations
+out.yaml
+.coverage
