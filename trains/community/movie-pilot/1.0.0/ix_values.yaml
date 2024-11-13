@@ -1,0 +1,7 @@
+images:
+  image:
+    repository: jxxghp/moviepilot-v2
+    tag: 2.0.1
+consts:
+  moviepilot_container_name: moviepilotv2
+  perms_container_name: permissions
