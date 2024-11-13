@@ -1,0 +1,37 @@
+app_version: 2.0.1
+capabilities: []
+categories:
+  - media
+description: Moviepilot is a free media library management tool
+home: https://wiki.movie-pilot.org/
+host_mounts: []
+icon: https://media.sys.truenas.net/apps/jellyfin/icons/icon.svg
+keywords:
+  - entertainment
+  - movies
+  - series
+  - tv
+  - media
+  - streaming
+lib_version: 1.1.4
+lib_version_hash: 6e32ff5969906d9c3a10fea2b17fdd3197afb052d3432344da03188d8a907113
+maintainers:
+  - email: dev@ixsystems.com
+    name: truenas
+    url: https://www.truenas.com/
+name: Moviepilot
+run_as_context:
+  - description: Moviepilot runs as any non-root user.
+    gid: 568
+    group_name: Moviepilot
+    uid: 568
+    user_name: Moviepilot
+screenshots:
+  - https://media.sys.truenas.net/apps/jellyfin/screenshots/screenshot1.png
+  - https://media.sys.truenas.net/apps/jellyfin/screenshots/screenshot2.png
+sources:
+  - https://hub.docker.com/r/jxxghp/moviepilot-v2
+  - https://wiki.movie-pilot.org
+title: Moviepilot
+train: community
+version: 1.0.0
