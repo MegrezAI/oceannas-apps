@@ -1,34 +1,31 @@
 {
-    "1.0.19": {
+    "1.0.0": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/oceannas-apps/oceannas-apps/trains/community/searxng/1.0.19",
-        "last_update": "2024-12-19 10:40:07",
+        "location": "/__w/oceannas-apps/oceannas-apps/trains/community/moviepilot/1.0.0",
+        "last_update": "2024-12-19 10:42:10",
         "required_features": [],
-        "human_version": "2024.10.23-b14d885f2_1.0.19",
-        "version": "1.0.19",
+        "human_version": "1.9.17_1.0.0",
+        "version": "1.0.0",
         "app_metadata": {
-            "app_version": "2024.10.23-b14d885f2",
-            "capabilities": [
-                {
-                    "description": "SearXNG requires this ability to switch user for sub-processes.",
-                    "name": "SETUID"
-                },
-                {
-                    "description": "SearXNG requires this ability to switch group for sub-processes.",
-                    "name": "SETGID"
-                }
-            ],
+            "app_version": "1.9.17",
+            "capabilities": [],
             "categories": [
-                "productivity"
+                "media"
             ],
-            "description": "SearXNG is a privacy-respecting, hackable metasearch engine",
-            "home": "https://github.com/searxng/searxng",
+            "description": "MoviePilot is a Free Software Media System that puts you in control of managing and streaming your media.",
+            "home": "https://moviepilot.org/",
             "host_mounts": [],
-            "icon": "https://media.sys.truenas.net/apps/searxng/icons/icon.svg",
+            "icon": "https://nasweb.leapgpt.app/apps/moviepilot/icons/icon.png",
             "keywords": [
-                "search"
+                "entertainment",
+                "movies",
+                "series",
+                "tv",
+                "media",
+                "streaming",
+                "metadata"
             ],
             "lib_version": "1.1.4",
             "lib_version_hash": "6e32ff5969906d9c3a10fea2b17fdd3197afb052d3432344da03188d8a907113",
@@ -39,66 +36,85 @@
                     "url": "https://www.truenas.com/"
                 }
             ],
-            "name": "searxng",
+            "name": "moviepilot",
             "run_as_context": [
                 {
-                    "description": "SearXNG runs as root user.",
-                    "gid": 0,
-                    "group_name": "root",
-                    "uid": 0,
-                    "user_name": "root"
+                    "description": "MoviePilot runs as any non-root user.",
+                    "gid": 568,
+                    "group_name": "moviepilot",
+                    "uid": 568,
+                    "user_name": "moviepilot"
                 }
             ],
-            "screenshots": [],
-            "sources": [
-                "https://hub.docker.com/r/searxng/searxng",
-                "https://github.com/searxng/searxng"
+            "screenshots": [
+                "https://media.sys.truenas.net/apps/moviepilot/screenshots/screenshot1.png",
+                "https://media.sys.truenas.net/apps/moviepilot/screenshots/screenshot2.png"
             ],
-            "title": "SearXNG",
+            "sources": [
+                "https://hub.docker.com/r/moviepilot/moviepilot",
+                "https://moviepilot.org/"
+            ],
+            "title": "MoviePilot",
             "train": "community",
-            "version": "1.0.19"
+            "version": "1.0.0"
         },
         "schema": {
             "groups": [
                 {
-                    "name": "SearXNG Configuration",
-                    "description": "Configure SearXNG"
+                    "name": "MoviePilot Configuration",
+                    "description": "Configure MoviePilot"
+                },
+                {
+                    "name": "User and Group Configuration",
+                    "description": "Configure User and Group for MoviePilot"
                 },
                 {
                     "name": "Network Configuration",
-                    "description": "Configure Network for SearXNG"
+                    "description": "Configure Network for MoviePilot"
                 },
                 {
                     "name": "Storage Configuration",
-                    "description": "Configure Storage for SearXNG"
+                    "description": "Configure Storage for MoviePilot"
                 },
                 {
                     "name": "Resources Configuration",
-                    "description": "Configure Resources for SearXNG"
+                    "description": "Configure Resources for MoviePilot"
                 }
             ],
             "questions": [
                 {
-                    "variable": "searxng",
+                    "variable": "TZ",
+                    "group": "MoviePilot Configuration",
+                    "label": "Timezone",
+                    "schema": {
+                        "type": "string",
+                        "default": "Etc/UTC",
+                        "required": true,
+                        "$ref": [
+                            "definitions/timezone"
+                        ]
+                    }
+                },
+                {
+                    "variable": "moviepilot",
                     "label": "",
-                    "group": "SearXNG Configuration",
+                    "group": "MoviePilot Configuration",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
-                                "variable": "instance_name",
-                                "label": "Instance Name",
-                                "description": "The name of the SearXNG instance.",
+                                "variable": "publish_server_url",
+                                "label": "Published Server URL",
+                                "description": "Optional - The URL that MoviePilot will be advertised.",
                                 "schema": {
                                     "type": "string",
-                                    "default": "SearXNG",
-                                    "required": true
+                                    "default": ""
                                 }
                             },
                             {
                                 "variable": "additional_envs",
                                 "label": "Additional Environment Variables",
-                                "description": "Configure additional environment variables for SearXNG.",
+                                "description": "Configure additional environment variables for MoviePilot.",
                                 "schema": {
                                     "type": "list",
                                     "default": [],
@@ -135,6 +151,38 @@
                     }
                 },
                 {
+                    "variable": "run_as",
+                    "label": "",
+                    "group": "User and Group Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "user",
+                                "label": "User ID",
+                                "description": "The user id that MoviePilot files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 0,
+                                    "default": 568,
+                                    "required": true
+                                }
+                            },
+                            {
+                                "variable": "group",
+                                "label": "Group ID",
+                                "description": "The group id that MoviePilot files will be owned by.",
+                                "schema": {
+                                    "type": "int",
+                                    "min": 0,
+                                    "default": 568,
+                                    "required": true
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
                     "variable": "network",
                     "label": "",
                     "group": "Network Configuration",
@@ -144,10 +192,17 @@
                             {
                                 "variable": "web_port",
                                 "label": "WebUI Port",
-                                "description": "The port for SearXNG WebUI",
+                                "description": "The port for MoviePilot WebUI",
                                 "schema": {
                                     "type": "int",
-                                    "default": 30053,
+                                    "default": 30015,
+                                    "show_if": [
+                                        [
+                                            "host_network",
+                                            "=",
+                                            false
+                                        ]
+                                    ],
                                     "required": true,
                                     "$ref": [
                                         "definitions/port"
@@ -175,8 +230,8 @@
                         "attrs": [
                             {
                                 "variable": "config",
-                                "label": "SearXNG Config Storage",
-                                "description": "The path to store SearXNG Config.",
+                                "label": "MoviePilot Config Storage",
+                                "description": "The path to store MoviePilot Config.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
@@ -320,9 +375,335 @@
                                 }
                             },
                             {
+                                "variable": "cache",
+                                "label": "MoviePilot Cache Storage",
+                                "description": "The path to store MoviePilot Cache.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "immutable": true,
+                                                "default": "ix_volume",
+                                                "enum": [
+                                                    {
+                                                        "value": "host_path",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ix_volume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "ix_volume_config",
+                                            "label": "ixVolume Configuration",
+                                            "description": "The configuration for the ixVolume dataset.",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ix_volume"
+                                                    ]
+                                                ],
+                                                "$ref": [
+                                                    "normalize/ix_volume"
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "acl_enable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the storage.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "dataset_name",
+                                                        "label": "Dataset Name",
+                                                        "description": "The name of the dataset to use for storage.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "immutable": true,
+                                                            "hidden": true,
+                                                            "default": "cache"
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "acl_entries",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "acl_enable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": []
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "host_path_config",
+                                            "label": "Host Path Configuration",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "host_path"
+                                                    ]
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "acl_enable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the storage.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "acl",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "acl_enable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": [],
+                                                            "$ref": [
+                                                                "normalize/acl"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "path",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "acl_enable",
+                                                                    "=",
+                                                                    false
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "transcodes",
+                                "label": "MoviePilot Transcode Storage",
+                                "description": "The path to store MoviePilot Transcode.",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\nTemporary: Is a temporary directory that will be created on the disk as a docker volume.\ntmpfs: Is a temporary directory that will be created on the RAM.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": true,
+                                                "default": "temporary",
+                                                "enum": [
+                                                    {
+                                                        "value": "host_path",
+                                                        "description": "Host Path (Path that already exists on the system)"
+                                                    },
+                                                    {
+                                                        "value": "ix_volume",
+                                                        "description": "ixVolume (Dataset created automatically by the system)"
+                                                    },
+                                                    {
+                                                        "value": "temporary",
+                                                        "description": "Temporary (Temporary directory created on the disk)"
+                                                    },
+                                                    {
+                                                        "value": "tmpfs",
+                                                        "description": "tmpfs (Temporary directory created on the RAM)"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "tmpfs_config",
+                                            "label": "tmpfs Configuration",
+                                            "description": "The configuration for the tmpfs dataset.",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "tmpfs"
+                                                    ]
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "size",
+                                                        "label": "Tmpfs Size Limit (in Mi)",
+                                                        "description": "The maximum size (in Mi) of the temporary directory.</br>\nFor example: 500\n",
+                                                        "schema": {
+                                                            "type": "int",
+                                                            "default": 500,
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "ix_volume_config",
+                                            "label": "ixVolume Configuration",
+                                            "description": "The configuration for the ixVolume dataset.",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "ix_volume"
+                                                    ]
+                                                ],
+                                                "$ref": [
+                                                    "normalize/ix_volume"
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "acl_enable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the storage.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "dataset_name",
+                                                        "label": "Dataset Name",
+                                                        "description": "The name of the dataset to use for storage.",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "immutable": true,
+                                                            "hidden": true,
+                                                            "default": "transcodes"
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "acl_entries",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "acl_enable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": []
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "host_path_config",
+                                            "label": "Host Path Configuration",
+                                            "schema": {
+                                                "type": "dict",
+                                                "show_if": [
+                                                    [
+                                                        "type",
+                                                        "=",
+                                                        "host_path"
+                                                    ]
+                                                ],
+                                                "attrs": [
+                                                    {
+                                                        "variable": "acl_enable",
+                                                        "label": "Enable ACL",
+                                                        "description": "Enable ACL for the storage.",
+                                                        "schema": {
+                                                            "type": "boolean",
+                                                            "default": false
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "acl",
+                                                        "label": "ACL Configuration",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "show_if": [
+                                                                [
+                                                                    "acl_enable",
+                                                                    "=",
+                                                                    true
+                                                                ]
+                                                            ],
+                                                            "attrs": [],
+                                                            "$ref": [
+                                                                "normalize/acl"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "path",
+                                                        "label": "Host Path",
+                                                        "description": "The host path to use for storage.",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "show_if": [
+                                                                [
+                                                                    "acl_enable",
+                                                                    "=",
+                                                                    false
+                                                                ]
+                                                            ],
+                                                            "required": true
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
                                 "variable": "additional_storage",
                                 "label": "Additional Storage",
-                                "description": "Additional storage for SearXNG.",
+                                "description": "Additional storage for MoviePilot.",
                                 "schema": {
                                     "type": "list",
                                     "default": [],
@@ -484,10 +865,7 @@
                                                                                 true
                                                                             ]
                                                                         ],
-                                                                        "attrs": [],
-                                                                        "$ref": [
-                                                                            "normalize/acl"
-                                                                        ]
+                                                                        "attrs": []
                                                                     }
                                                                 }
                                                             ]
@@ -580,7 +958,7 @@
                                         {
                                             "variable": "cpus",
                                             "label": "CPUs",
-                                            "description": "CPUs limit for SearXNG.",
+                                            "description": "CPUs limit for MoviePilot.",
                                             "schema": {
                                                 "type": "int",
                                                 "default": 2,
@@ -590,7 +968,7 @@
                                         {
                                             "variable": "memory",
                                             "label": "Memory (in MB)",
-                                            "description": "Memory limit for SearXNG.",
+                                            "description": "Memory limit for MoviePilot.",
                                             "schema": {
                                                 "type": "int",
                                                 "default": 4096,
@@ -599,13 +977,25 @@
                                         }
                                     ]
                                 }
+                            },
+                            {
+                                "variable": "gpus",
+                                "group": "Resources Configuration",
+                                "label": "GPU Configuration",
+                                "schema": {
+                                    "type": "dict",
+                                    "$ref": [
+                                        "definitions/gpu_configuration"
+                                    ],
+                                    "attrs": []
+                                }
                             }
                         ]
                     }
                 }
             ]
         },
-        "readme": "<h1>SearXNG</h1> <p><a href=\"https://github.com/searxng/searxng\">SearXNG</a> is a privacy-respecting, hackable metasearch engine</p>",
+        "readme": "<h1>MoviePilot</h1> <p><a href=\"https://github.com/jxxghp/MoviePilot\">MoviePilot</a> - NAS Media Library Automation Management Tool.</p>",
         "changelog": null
     }
 }
