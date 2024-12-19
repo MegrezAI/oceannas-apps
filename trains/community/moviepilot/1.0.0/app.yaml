@@ -1,0 +1,39 @@
+app_version: 1.9.17
+capabilities: []
+categories:
+  - media
+description: MoviePilot is a Free Software Media System that puts you in control of
+  managing and streaming your media.
+home: https://moviepilot.org/
+host_mounts: []
+icon: https://nasweb.leapgpt.app/apps/moviepilot/icons/icon.png
+keywords:
+  - entertainment
+  - movies
+  - series
+  - tv
+  - media
+  - streaming
+  - metadata
+lib_version: 1.1.4
+lib_version_hash: 6e32ff5969906d9c3a10fea2b17fdd3197afb052d3432344da03188d8a907113
+maintainers:
+  - email: dev@ixsystems.com
+    name: truenas
+    url: https://www.truenas.com/
+name: moviepilot
+run_as_context:
+  - description: MoviePilot runs as any non-root user.
+    gid: 568
+    group_name: moviepilot
+    uid: 568
+    user_name: moviepilot
+screenshots:
+  - https://media.sys.truenas.net/apps/moviepilot/screenshots/screenshot1.png
+  - https://media.sys.truenas.net/apps/moviepilot/screenshots/screenshot2.png
+sources:
+  - https://hub.docker.com/r/moviepilot/moviepilot
+  - https://moviepilot.org/
+title: MoviePilot
+train: community
+version: 1.0.0
