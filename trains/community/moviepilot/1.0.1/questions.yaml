@@ -27,12 +27,18 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: publish_server_url
-          label: Published Server URL
-          description: Optional - The URL that MoviePilot will be advertised.
+        - variable: image_selector
+          label: Image Selector
+          description: Select the image to use for MoviePilot.
           schema:
             type: string
-            default: ''
+            default: image
+            required: true
+            enum:
+              - value: image
+                description: v2.x.x image.
+              - value: v1_image
+                description: v1.x.x image.
         - variable: additional_envs
           label: Additional Environment Variables
           description: Configure additional environment variables for MoviePilot.
