@@ -1,13 +1,13 @@
 {
-    "1.0.1": {
+    "1.0.2": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/oceannas-apps/oceannas-apps/trains/community/moviepilot/1.0.1",
-        "last_update": "2024-12-31 07:29:08",
+        "location": "/__w/oceannas-apps/oceannas-apps/trains/community/moviepilot/1.0.2",
+        "last_update": "2024-12-31 09:41:35",
         "required_features": [],
-        "human_version": "1.9.17_1.0.1",
-        "version": "1.0.1",
+        "human_version": "1.9.17_1.0.2",
+        "version": "1.0.2",
         "app_metadata": {
             "app_version": "1.9.17",
             "capabilities": [],
@@ -56,7 +56,7 @@
             ],
             "title": "MoviePilot",
             "train": "community",
-            "version": "1.0.1"
+            "version": "1.0.2"
         },
         "schema": {
             "groups": [
@@ -386,9 +386,9 @@
                                 }
                             },
                             {
-                                "variable": "cache",
-                                "label": "MoviePilot Cache Storage",
-                                "description": "The path to store MoviePilot Cache.",
+                                "variable": "media",
+                                "label": "MoviePilot Media Storage",
+                                "description": "The path to store MoviePilot Media.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
@@ -448,7 +448,7 @@
                                                             "required": true,
                                                             "immutable": true,
                                                             "hidden": true,
-                                                            "default": "cache"
+                                                            "default": "media"
                                                         }
                                                     },
                                                     {
@@ -532,20 +532,21 @@
                                 }
                             },
                             {
-                                "variable": "transcodes",
-                                "label": "MoviePilot Transcode Storage",
-                                "description": "The path to store MoviePilot Transcode.",
+                                "variable": "downloads",
+                                "label": "MoviePilot Downloads Storage",
+                                "description": "The path to store MoviePilot Downloads.",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
                                         {
                                             "variable": "type",
                                             "label": "Type",
-                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\nTemporary: Is a temporary directory that will be created on the disk as a docker volume.\ntmpfs: Is a temporary directory that will be created on the RAM.\n",
+                                            "description": "ixVolume: Is dataset created automatically by the system.</br>\nHost Path: Is a path that already exists on the system.\n",
                                             "schema": {
                                                 "type": "string",
                                                 "required": true,
-                                                "default": "temporary",
+                                                "immutable": true,
+                                                "default": "ix_volume",
                                                 "enum": [
                                                     {
                                                         "value": "host_path",
@@ -554,41 +555,6 @@
                                                     {
                                                         "value": "ix_volume",
                                                         "description": "ixVolume (Dataset created automatically by the system)"
-                                                    },
-                                                    {
-                                                        "value": "temporary",
-                                                        "description": "Temporary (Temporary directory created on the disk)"
-                                                    },
-                                                    {
-                                                        "value": "tmpfs",
-                                                        "description": "tmpfs (Temporary directory created on the RAM)"
-                                                    }
-                                                ]
-                                            }
-                                        },
-                                        {
-                                            "variable": "tmpfs_config",
-                                            "label": "tmpfs Configuration",
-                                            "description": "The configuration for the tmpfs dataset.",
-                                            "schema": {
-                                                "type": "dict",
-                                                "show_if": [
-                                                    [
-                                                        "type",
-                                                        "=",
-                                                        "tmpfs"
-                                                    ]
-                                                ],
-                                                "attrs": [
-                                                    {
-                                                        "variable": "size",
-                                                        "label": "Tmpfs Size Limit (in Mi)",
-                                                        "description": "The maximum size (in Mi) of the temporary directory.</br>\nFor example: 500\n",
-                                                        "schema": {
-                                                            "type": "int",
-                                                            "default": 500,
-                                                            "required": true
-                                                        }
                                                     }
                                                 ]
                                             }
@@ -628,7 +594,7 @@
                                                             "required": true,
                                                             "immutable": true,
                                                             "hidden": true,
-                                                            "default": "transcodes"
+                                                            "default": "downloads"
                                                         }
                                                     },
                                                     {
