@@ -16,18 +16,20 @@ run_as:
   group: 568
 
 storage:
-  cache:
-    type: host_path
-    auto_permissions: true
-    host_path_config:
-      path: /mnt/moviepilot-data
   config:
     type: volume
     auto_permissions: true
     volume_name: moviepilot-config
-  transcodes:
-    type: tmpfs
-    volume_name: moviepilot-transcodes
+  media:
+    type: host_path
+    auto_permissions: true
+    host_path_config:
+      path: /mnt/moviepilot-data
+  downloads:
+    type: host_path
+    auto_permissions: true
+    host_path_config:
+      path: /mnt/moviepilot-downloads
   additional_storage:
     - type: volume
       auto_permissions: true
